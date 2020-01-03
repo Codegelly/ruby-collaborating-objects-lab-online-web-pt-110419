@@ -16,15 +16,20 @@ class Artist
   
   def add_song(song)
     @songs << song  
+    song.artist = self 
+    song 
   end 
+  
   def self.find_or_create_by_name(name)
-    if self.find(name)
-  else
-    self.create(name)
-end 
+     self.all.detect {|artist| artist.name == name} || Artist.new(name).save
+   
+    #if self.find(name)
+  #else
+   # self.create(name)
+#end
 end 
 
-def print_songs()
+def print_songs
   puts @songs.collect {|x| x.name}
 end   
 
